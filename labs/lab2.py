@@ -12,7 +12,6 @@ def prostoe(a):
         ot=0
     return ot
 
-
 def task1():
     print("Введите число")
     a=int(input())
@@ -21,17 +20,16 @@ def task1():
     else:
         print('Не простое')
     task1()
- def f(x):
+
+ def function(x):
     if math.cos(x)<=0:
         if math.e ** x>0:
-            return(math.cos(x),math.e ** x)
-     f(x)
+            return math.cos(x), math.e ** x
 def task2():
      a=2
      b=15
      for x in range(a,b):
         f(x)
-        print(x)
      plt.plot(f(x))
      plt.show()
     task2()
