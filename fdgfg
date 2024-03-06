@@ -11,6 +11,8 @@ from PyQt5.QtWidgets import (
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+
+
 class MainWindow(QMainWindow):
     def plot_data(self):
 
@@ -22,16 +24,21 @@ class MainWindow(QMainWindow):
             range_end = 1
 
         x = np.linspace(range_start, range_end, 50)
-        function = lambda x: x ** 3
+        try:
+            expression = self.function_input.text()
+        except ValueError:
+            expression = "x**3"
+        functions = {}  # определим словарь функций
+        exec(f"def f(x): return {expression}", functions)
+        function = functions["f"]
         y = [function(value) for value in x]
         plt.plot(x, y)
         plt.grid(True)
         plt.xlabel('x')
         plt.ylabel('y')
-        plt.title('Заголовок график y=x**3')
+        plt.title('Заголовок графика ' + expression)
         # Обновление виджета №0 (виджет с полотном Matplotlib)
         self.centralWidget().layout().itemAt(0).widget().draw()
-        
 
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
